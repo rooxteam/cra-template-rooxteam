@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <title>SPA template</title>
+    <script type="text/javascript">
+      <% if(process.env.NODE_ENV !== "production") { %>
+        var roox_config = {};
+      <% } else { %>
+        //Works only as inline comment after statement
+        var roox_config = <!--# block name="fallback" --> {};<!--# endblock --><!--# include file="config.json" stub="fallback" -->
+      <% } %>
+    </script>
+
+    <script type="text/javascript">
+      <% if(process.env.NODE_ENV !== "production") { %>
+        var roox_user = {};
+      <% } else { %>
+        //Works only as inline comment after statement
+        var roox_user = <!--# block name="user_fallback" -->{};<!--# endblock --><!--# include virtual="/customer-webapi-1.0/tokens/@current" stub="user_fallback" -->
+      <% } %>
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>

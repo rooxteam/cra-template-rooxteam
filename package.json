@@ -1,0 +1,16 @@
+{
+  "name": "cra-template-rooxteam",
+  "version": "0.1.0",
+  "private": true,
+  "author": "roox",
+  "license": "ISC",
+  "engines": {
+    "node": ">=10.14.0"
+  },
+  "description": "Template for SPA",
+  "main": "template.json",
+  "files": [
+    "template",
+    "template.json"
+  ]
+}
