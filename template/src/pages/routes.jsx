@@ -4,7 +4,8 @@ import {
   Switch,
   Redirect,
 } from 'react-router-dom';
-import Home from './Home/Home';
+
+const Home = React.lazy(() => import('./Home/Home'));
 
 const routes = [
   {
