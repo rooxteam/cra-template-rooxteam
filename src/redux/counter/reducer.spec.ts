@@ -1,4 +1,4 @@
-import { DECREMENT_COUNTER, INCREMENT_COUNTER, INCREMENT_COUNTER_ASYNC } from './constants'
+import { DECREMENT_COUNTER, INCREMENT_COUNTER } from './constants'
 import counterReducer from './reducer'
 import { CounterActionTypes } from './types'
 

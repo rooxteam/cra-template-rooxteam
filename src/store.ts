@@ -20,10 +20,7 @@ const composeEnhancers = composeWithDevTools({
   // Specify name here, actionsBlacklist, actionsCreators and other options if needed
 })
 
-const store = createStore(
-  rootReducer,
-  composeEnhancers(applyMiddleware(...middlewares)),
-)
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(...middlewares)))
 
 sagaMiddleware.run(staticSagas)
 

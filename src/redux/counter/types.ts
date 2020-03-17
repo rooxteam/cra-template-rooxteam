@@ -1,5 +1,5 @@
-import { DECREMENT_COUNTER, INCREMENT_COUNTER, INCREMENT_COUNTER_ASYNC } from './constants'
 import { PutEffect } from 'redux-saga/effects'
+import { DECREMENT_COUNTER, INCREMENT_COUNTER, INCREMENT_COUNTER_ASYNC } from './constants'
 
 export interface IncrementCounterAction {
   type: typeof INCREMENT_COUNTER
@@ -25,5 +25,5 @@ export interface SystemState {
 export interface Handlers {
   [INCREMENT_COUNTER_ASYNC](
     action: IncrementCounterActionAsync,
-  ): Generator<Promise<number> | PutEffect<{ type: string }>, void, unknown>
+  ): Generator<Promise<number> | PutEffect<{ type: string }>, void>
 }

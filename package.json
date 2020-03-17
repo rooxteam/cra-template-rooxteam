@@ -1,8 +1,9 @@
 {
-  "name": "cra-template-roox-base-ts",
+  "name": "cra-template-rooxteam-ts",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@neuralegion/cypress-har-generator": "^4.0.0",
     "@types/enzyme": "3.10.4",
     "@types/enzyme-adapter-react-16": "1.0.5",
     "@types/jest": "25.1.1",
@@ -11,19 +12,29 @@
     "@types/react-dom": "16.9.5",
     "@types/react-redux": "7.1.7",
     "@types/react-router-dom": "5.1.3",
+    "@types/redux-mock-store": "^1.0.2",
     "@types/redux-saga": "^0.10.5",
     "@typescript-eslint/eslint-plugin": "2.18.0",
     "@typescript-eslint/parser": "2.18.0",
+    "allure-commandline": "^2.13.0",
+    "cypress": "^4.2.0",
+    "cypress-dotenv": "^1.1.1",
     "enzyme": "3.11.0",
     "enzyme-adapter-react-16": "1.15.2",
     "eslint": "6.8.0",
     "eslint-config-airbnb-typescript": "6.3.1",
     "eslint-config-prettier": "6.10.0",
+    "eslint-plugin-chai-friendly": "^0.5.0",
+    "eslint-plugin-cypress": "^2.10.3",
     "eslint-plugin-import": "2.20.1",
     "eslint-plugin-jsx-a11y": "6.2.3",
     "eslint-plugin-prettier": "3.1.2",
     "eslint-plugin-react": "7.18.2",
     "eslint-plugin-react-hooks": "2.3.0",
+    "husky": "^4.2.3",
+    "lint-staged": "^10.0.8",
+    "mocha": "^7.1.0",
+    "mocha-allure-reporter": "^1.4.0",
     "prettier": "1.19.1",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
@@ -34,16 +45,20 @@
     "redux-devtools-extension": "2.13.8",
     "redux-mock-store": "1.5.4",
     "redux-saga": "^1.1.3",
-    "typescript": "~3.8.0",
-    "@types/redux-mock-store": "^1.0.2"
+    "redux-saga-test-plan": "^4.0.0-beta.2",
+    "typescript": "~3.8.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "HTTPS=true react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx ./",
-    "fix": "eslint --ext .js,.jsx,.ts,.tsx  --fix ./"
+    "fix": "eslint --ext .js,.jsx,.ts,.tsx  --fix ./",
+    "cy:open": "npx cypress open",
+    "cy:test": "npx cypress run --headless -b chrome -r mocha-allure-reporter",
+    "allure:report": "npx allure generate allure-results --clean -o allure-report",
+    "allure:clean": "rm -r allure-results/ allure-report/"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -59,5 +74,16 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "lint-staged": {
+    "./**/*.{js,jsx,ts,tsx,css,scss}": [
+      "prettier --write",
+      "yarn lint"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsc && lint-staged"
+    }
   }
 }

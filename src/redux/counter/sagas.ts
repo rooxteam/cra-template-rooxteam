@@ -5,7 +5,7 @@ import { Handlers } from './types'
 
 const delay = (ms: number): Promise<number> => new Promise(res => setTimeout(res, ms))
 
-const HANDLERS: Handlers = {
+export const HANDLERS: Handlers = {
   *[actionsTypes.INCREMENT_COUNTER_ASYNC](action) {
     yield delay(action.delay)
     yield put(actions.incrementCounter())

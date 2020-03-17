@@ -3,7 +3,7 @@ import { Provider } from 'react-redux'
 import { mount } from 'enzyme'
 import configureStore from 'redux-mock-store'
 
-import { actionTypes } from '../../redux/counter'
+import * as actionTypes from '../../redux/counter/constants'
 import Counter from './Counter'
 
 describe('Counter', () => {
@@ -27,7 +27,7 @@ describe('Counter', () => {
     const wrapper = mount(
       <Provider store={store}>
         <Counter />
-      </Provider>
+      </Provider>,
     )
 
     const countValue = wrapper.find('strong').text()
@@ -38,7 +38,7 @@ describe('Counter', () => {
     const wrapper = mount(
       <Provider store={store}>
         <Counter />
-      </Provider>
+      </Provider>,
     )
 
     wrapper
@@ -57,7 +57,7 @@ describe('Counter', () => {
     const wrapper = mount(
       <Provider store={store}>
         <Counter />
-      </Provider>
+      </Provider>,
     )
 
     wrapper

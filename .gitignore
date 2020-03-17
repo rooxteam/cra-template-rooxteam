@@ -23,3 +23,10 @@ yarn-debug.log*
 yarn-error.log*
 
 .idea
+# cypress
+*.har
+*.mp4
+cypress/screenshots/*
+cypress/videos/*
+allure-results
+allure-report

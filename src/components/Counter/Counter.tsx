@@ -14,11 +14,11 @@ const Counter: React.FC = () => {
             <div className="card-content white-text">
               <span className="card-title">Counter component</span>
               <h4>
-                Counter: <strong>{count}</strong>
+                Counter: <strong data-qa="counter-value">{count}</strong>
               </h4>
               <p>
-                Here you can increment and decrement counter value using buttons
-                below. All the state updates are performed via redux actions.
+                Here you can increment and decrement counter value using buttons below. All the state updates are
+                performed via redux actions.
               </p>
             </div>
             <div className="card-action">
