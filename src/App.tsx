@@ -1,8 +1,8 @@
 import React from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
-
 import { Navbar } from './components'
 import { About, Home } from './pages'
+import './App.module.scss'
 
 const App: React.FC = () => {
   return (

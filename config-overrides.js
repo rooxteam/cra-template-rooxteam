@@ -1,13 +1,14 @@
-const { override, useBabelRc, useEslintRc } = require('customize-cra')
+const { override, useBabelRc, useEslintRc, addPostcssPlugins } = require('customize-cra')
 const path = require('path')
 const webpack = require('webpack') // eslint-disable-line
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
-const UglifyJsPlugin = require('terser-webpack-plugin') // eslint-disable-line
+const TerserPlugin = require('terser-webpack-plugin') // eslint-disable-line
 const ManifestPlugin = require('webpack-manifest-plugin') // eslint-disable-line
 const BrotliPlugin = require('brotli-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 const GenerateJsonPlugin = require('generate-json-webpack-plugin')
 const zopfli = require('@gfx/zopfli')
+const autoprefixer = require('autoprefixer')
 // const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const { BUILD_NUMBER, JOB_NAME, GIT_BRANCH, GIT_COMMIT } = process.env
 
@@ -87,7 +88,7 @@ const addPlugins = config => {
 
   const plugins = [
     { plugin: LodashModuleReplacementPlugin },
-    { plugin: UglifyJsPlugin, condition: isProduction },
+    { plugin: TerserPlugin, options: { chunkFilter: () => false }, condition: isProduction },
     { plugin: ManifestPlugin, options: manifest, condition: isProduction },
     { plugin: BrotliPlugin, options: brotli, condition: isProduction },
     { plugin: CompressionPlugin, options: compression, condition: isProduction },
@@ -131,6 +132,36 @@ const addLoaders = config => {
 //   return config;
 // };
 
+const replacePluginOption = (plugins, nameMatcher, newOptions) => {
+  const pluginIndex = plugins.findIndex(plugin => {
+    return plugin.constructor && plugin.constructor.name && nameMatcher(plugin.constructor.name)
+  })
+
+  if (pluginIndex === -1) {
+    return plugins
+  }
+  Object.assign(plugins[pluginIndex].options, newOptions)
+  return null
+}
+
+const disableSSICommentsRemoving = config => {
+  replacePluginOption(config.plugins, name => /HtmlWebpackPlugin/i.test(name), {
+    minify: {
+      removeComments: false,
+      collapseWhitespace: true,
+      removeRedundantAttributes: true,
+      useShortDoctype: true,
+      removeEmptyAttributes: true,
+      removeStyleLinkTypeAttributes: true,
+      keepClosingSlash: true,
+      minifyJS: true,
+      minifyCSS: true,
+      minifyURLs: true,
+    },
+  })
+  return config
+}
+
 const resolveReact = baseConfig => {
   const config = { ...baseConfig }
   config.resolve.alias.react = path.resolve('./node_modules/react')
@@ -144,5 +175,7 @@ module.exports = override(
   addLoaders,
   addWebpackPlugins,
   resolveReact,
+  disableSSICommentsRemoving,
+  addPostcssPlugins([autoprefixer({ grid: true })]),
   // disableModuleScope,
 )

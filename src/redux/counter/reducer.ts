@@ -1,8 +1,9 @@
-import { INCREMENT_COUNTER, DECREMENT_COUNTER } from './constants'
+import { DECREMENT_COUNTER, INCREMENT_COUNTER } from './constants'
 import { CounterActionTypes } from './types'
+import configAdapter from '../../configs/config'
 
 const initialState = {
-  value: 0,
+  value: !Number.isNaN(Number(configAdapter('counterStartValue'))) ? Number(configAdapter('counterStartValue')) : 0,
 }
 
 export default (state = initialState, action: CounterActionTypes) => {
