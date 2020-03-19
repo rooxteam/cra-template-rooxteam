@@ -1,0 +1,5 @@
+export const AUTH_DUCK = 'auth'
+export const AUTH_LOGIN = 'AUTH/LOGIN'
+export const AUTH_LOGOUT = 'AUTH/LOGOUT'
+export const AUTH_AUTHENTICATED = 'AUTH/AUTHENTICATED'
+export const AUTH_LOADING_STATE = 'AUTH/LOADING_STATE'

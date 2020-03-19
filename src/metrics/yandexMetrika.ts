@@ -1,26 +1,25 @@
-import ReactGA from 'react-ga'
-import { IGAInitOptions, IPageViewParams, ITrackParams } from './types'
+import ym from 'react-yandex-metrika'
+import { IPageViewParams, ITrackParams, IYMInitOptions } from './types'
 
 /**
- * Performs the tracking calls to Google Analytics.
+ * Performs the tracking calls to Yandex Analytics.
  * Utilizing Segment IO Analytics Integration.
  *
- * @module GoogleAnalytics
+ * @module YandexMetrika
  * @class
  * @internal
  */
-
-export default class GoogleAnalytics {
+class YandexMetrika {
   private loaded: boolean
 
   private name: string
 
   private userId: string | null
 
-  private promise: Promise<void> | null
+  protected promise: Promise<void> | null
 
-  constructor(private options: IGAInitOptions) {
-    this.name = 'Google Analytics'
+  constructor(private options: IYMInitOptions) {
+    this.name = 'Yandex Analytics'
     this.loaded = false
     this.options = options
     this.userId = null
@@ -44,7 +43,7 @@ export default class GoogleAnalytics {
     return new Promise((resolve, reject) => {
       this.load()
         .then(() => {
-          GoogleAnalytics.push(eventName)
+          YandexMetrika.push(eventName, params)
           resolve({
             eventName,
             params,
@@ -52,32 +51,28 @@ export default class GoogleAnalytics {
         })
         .catch((error: Error) => {
           // eslint-disable-next-line no-console
-          console.error('GA: Failed to initialize', error)
+          console.error('YM: Failed to initialize', error)
           reject(error)
         })
     })
   }
 
-  static push(eventName: string /* , params: ITrackParams */) {
+  static push(eventName: string, params: ITrackParams) {
     if (eventName === 'pageView') {
+      ym('hit', params.category, { params })
       // analytics.page(params.category, params);
-      ReactGA.pageview(window.location.pathname + window.location.search)
       return
     }
+    ym('reachGoal', eventName, params)
     // analytics.track(eventName, params);
-    ReactGA.event({
-      category: eventName,
-      action: eventName,
-    })
   }
 
-  private load() {
+  load() {
     if (!this.promise) {
       this.promise = new Promise(resolve => {
         if (this.loaded) {
           resolve()
         } else {
-          ReactGA.initialize(this.options.trackingId)
           this.loaded = true
           resolve()
         }
@@ -86,3 +81,5 @@ export default class GoogleAnalytics {
     return this.promise
   }
 }
+
+export default YandexMetrika

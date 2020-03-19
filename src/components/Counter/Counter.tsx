@@ -17,8 +17,8 @@ const Counter: React.FC = () => {
                 Counter: <strong data-qa="counter-value">{count}</strong>
               </h4>
               <p>
-                Here you can increment and decrement counter value using buttons below. All the state updates are
-                performed via redux actions.
+                Here you can increment and decrement counter value using buttons
+                below. All the state updates are performed via redux actions.
               </p>
             </div>
             <div className="card-action">
@@ -43,7 +43,9 @@ const Counter: React.FC = () => {
                   className="waves-effect waves-teal btn-flat red"
                   type="button"
                   data-qa="increment-counter-async"
-                  onClick={() => dispatch(actionTypes.incrementCounterAsync(1000))}
+                  onClick={() =>
+                    dispatch(actionTypes.incrementCounterAsync(1000))
+                  }
                 >
                   increment async
                 </button>

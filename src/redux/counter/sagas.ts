@@ -1,11 +1,11 @@
 import { put, takeEvery } from 'redux-saga/effects'
 import * as actionsTypes from './constants'
 import * as actions from './actions'
-import { Handlers } from './types'
+import { IHandlers } from './types'
 
 const delay = (ms: number): Promise<number> => new Promise(res => setTimeout(res, ms))
 
-export const HANDLERS: Handlers = {
+export const HANDLERS: IHandlers = {
   *[actionsTypes.INCREMENT_COUNTER_ASYNC](action) {
     yield delay(action.delay)
     yield put(actions.incrementCounter())

@@ -1,3 +1,4 @@
+// @ts-ignore
 import sbjs from 'sourcebuster'
 import YandexMetrika from './yandexMetrika'
 import GoogleAnalytics from './googleAnalytics'
@@ -5,11 +6,11 @@ import GoogleAnalytics from './googleAnalytics'
 sbjs.init()
 
 const gaOptions = {
-  trackingId: 'UA-149871459-1',
+  trackingId: 'YOUR-GA-TRACKING-ID',
 }
 
-const ymOptions = {
-  counterId: 55749373,
+export const ymOptions = {
+  counterId: 11111111111111, // YOUR-YM-TRACKING-ID
 }
 
 const config = {

@@ -17,6 +17,7 @@
     "cypress/globals": true
   },
   "rules": {
+    "react/prop-types": 0,
     // Make prettier code formatting suggestions more verbose.
     "prettier/prettier": [
       "warn"

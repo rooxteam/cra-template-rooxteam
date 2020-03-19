@@ -9,11 +9,14 @@ interface IConfig {
 
 let config: IConfig
 
-const configAdapter = (key: string): string | number | null | undefined => config[key]
+const configAdapter = (key: string): string | number | null | undefined =>
+  config[key]
 
 const isDev =
   // @ts-ignore
-  process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test' || typeof window.roox_config === 'undefined'
+  process.env.NODE_ENV === 'development' ||
+  process.env.NODE_ENV === 'test' ||
+  typeof window.roox_config === 'undefined'
 
 if (isDev) {
   const localConfig = require('./localConfig') // eslint-disable-line global-require

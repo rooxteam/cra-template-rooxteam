@@ -1,4 +1,4 @@
-const { override, useBabelRc, useEslintRc, addPostcssPlugins } = require('customize-cra')
+const { override, useBabelRc, addPostcssPlugins } = require('customize-cra')
 const path = require('path')
 const webpack = require('webpack') // eslint-disable-line
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
@@ -170,7 +170,6 @@ const resolveReact = baseConfig => {
 
 module.exports = override(
   useBabelRc(),
-  useEslintRc(),
   addPlugins,
   addLoaders,
   addWebpackPlugins,

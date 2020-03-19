@@ -1,6 +1,6 @@
 import { DECREMENT_COUNTER, INCREMENT_COUNTER } from './constants'
 import counterReducer from './reducer'
-import { CounterActionTypes } from './types'
+import { TCounterActionTypes } from './types'
 
 describe('redux > counter > counterReducer', () => {
   it(`increments value, if ${INCREMENT_COUNTER} action is provided`, () => {
@@ -12,7 +12,7 @@ describe('redux > counter > counterReducer', () => {
       value: 1,
     }
 
-    const action: CounterActionTypes = {
+    const action: TCounterActionTypes = {
       type: INCREMENT_COUNTER,
     }
 
@@ -28,7 +28,7 @@ describe('redux > counter > counterReducer', () => {
       value: -1,
     }
 
-    const action: CounterActionTypes = {
+    const action: TCounterActionTypes = {
       type: DECREMENT_COUNTER,
     }
 

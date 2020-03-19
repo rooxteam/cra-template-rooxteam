@@ -2,15 +2,12 @@ import { applyMiddleware, combineReducers, createStore } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import createSagaMiddleware from 'redux-saga'
 import { all } from 'redux-saga/effects'
-import { CounterReducer } from './redux/counter'
-import { sagas } from './redux'
+import { reducers, sagas } from './redux'
 
 const sagaMiddleware = createSagaMiddleware()
 /* Create root reducer, containing all redux of the application */
 const middlewares = [sagaMiddleware]
-const rootReducer = combineReducers({
-  count: CounterReducer,
-})
+const rootReducer = combineReducers(reducers)
 
 function* staticSagas() {
   yield all([...sagas.map(saga => saga())])
