@@ -13,9 +13,9 @@ const configAdapter = (key: string): string | number | null | undefined =>
   config[key]
 
 const isDev =
-  // @ts-ignore
   process.env.NODE_ENV === 'development' ||
   process.env.NODE_ENV === 'test' ||
+  // @ts-ignore
   typeof window.roox_config === 'undefined'
 
 if (isDev) {

@@ -10,11 +10,16 @@ import {
 import * as actions from './actions'
 
 export const HANDLERS: Handlers = {
-  * [actionsTypes.AUTH_LOGIN]() {
+  *[actionsTypes.AUTH_LOGIN]() {
     // get token somehow and init the app for example just set cookie
     yield put(actions.loadingState(LOADING_STATE_LOADING))
     setCookie(AUTH_TOKEN_KEY, 'token')
     yield delay(1000)
+    yield put(actions.setIsAuthenticated(true))
+    yield put(actions.loadingState(LOADING_STATE_LOADED))
+  },
+  *[actionsTypes.AUTH_APP_INIT]() {
+    // get init application
     yield put(actions.setIsAuthenticated(true))
     yield put(actions.loadingState(LOADING_STATE_LOADED))
   },

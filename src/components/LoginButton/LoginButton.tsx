@@ -9,6 +9,7 @@ import { LOADING_STATE_LOADING } from '../../configs/constants'
 const LoginButton: React.FC = () => {
   const authLoadingState = useSelector(selectors.getAuthLoadingState)
   const dispatch = useDispatch()
+
   return (
     <button
       type="button"

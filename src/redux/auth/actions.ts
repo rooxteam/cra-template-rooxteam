@@ -16,3 +16,6 @@ export const loadingState = (
   type: actionTypes.AUTH_LOADING_STATE,
   loadingState: loadingStateParam,
 })
+export const appInit = (): IBaseAction => ({
+  type: actionTypes.AUTH_APP_INIT,
+})

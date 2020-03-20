@@ -3,7 +3,9 @@ import { ICounterMutations, ICounterState, TCounterActionTypes } from './types'
 import configAdapter from '../../configs/config'
 
 const getInitialState = (): ICounterState => ({
-  value: !Number.isNaN(Number(configAdapter('counterStartValue'))) ? Number(configAdapter('counterStartValue')) : 0,
+  value: !Number.isNaN(Number(configAdapter('counterStartValue')))
+    ? Number(configAdapter('counterStartValue'))
+    : 0,
 })
 
 const mutations: ICounterMutations = {

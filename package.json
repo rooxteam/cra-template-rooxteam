@@ -61,6 +61,10 @@
     "redux-saga": "^1.1.3",
     "redux-saga-test-plan": "^4.0.0-beta.2",
     "sourcebuster": "^1.1.0",
+    "stylelint": "^13.2.1",
+    "stylelint-config-prettier": "^8.0.1",
+    "stylelint-prettier": "^1.1.2",
+    "stylelint-scss": "^3.16.0",
     "svg-react-loader": "^0.4.6",
     "typescript": "~3.8.0"
   },
@@ -69,8 +73,11 @@
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject",
-    "lint": "eslint --ext .js,.jsx,.ts,.tsx ./src",
-    "fix": "eslint --ext .js,.jsx,.ts,.tsx  --fix ./src",
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx ./src && yarn run stylelint",
+    "lint-fix": "eslint --ext .js,.jsx,.ts,.tsx  --fix ./src && stylelint-fix",
+    "lint-staged": "lint-staged",
+    "stylelint": "stylelint **/*.scss **/*.module.scss",
+    "stylelint-fix": "stylelint **/*.scss **/*.module.scss --fix",
     "cy:open": "npx cypress open",
     "cy:test": "npx cypress run --headless -b chrome -r mocha-allure-reporter",
     "allure:report": "npx allure generate allure-results --clean -o allure-report",
@@ -92,10 +99,12 @@
     ]
   },
   "lint-staged": {
-    "./**/*.{js,jsx,ts,tsx,css,scss}": [
+    "*.{js,jsx,ts,tsx}": [
       "prettier --write",
       "yarn lint"
-    ]
+    ],
+    "*.{js,jsx}": "eslint",
+    "*.{module.scss,css}": "stylelint"
   },
   "husky": {
     "hooks": {
