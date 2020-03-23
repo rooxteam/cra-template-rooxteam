@@ -1,22 +1,31 @@
 {
   "root": true,
-  "parser": "babel-eslint",
-  "extends": "airbnb",
+  "plugins": [
+    "cypress",
+    "chai-friendly"
+  ],
+  "extends": [
+    "plugin:prettier/recommended",
+    "airbnb",
+    "prettier",
+    "prettier/react"
+  ],
   "env": {
-    "es6": true,
-    "browser": true,
-    "node": true,
+    "cypress/globals": true,
     "jest": true
   },
-  "plugins": ["jest"],
   "rules": {
-    "max-len": [1, {"code":  120}],
-    "no-restricted-syntax": "warn",
-    "react/jsx-filename-extension": [
-      1,
-      {
-        "extensions": [".js", "jsx"]
-      }
-    ]
+    // Make prettier code formatting suggestions more verbose.
+    "prettier/prettier": [
+      "warn"
+    ],
+    // Disable <Fragment> => <> replacement. Feel free to change
+    "react/jsx-fragments": "off",
+    // Disable prefer default export
+    "import/prefer-default-export": "off",
+    "cypress/no-assigning-return-values": "error",
+    "cypress/no-unnecessary-waiting": "error",
+    "cypress/assertion-before-screenshot": "warn",
+    "cypress/no-force": "warn"
   }
 }
