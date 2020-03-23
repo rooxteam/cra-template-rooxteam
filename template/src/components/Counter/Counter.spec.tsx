@@ -9,7 +9,7 @@ import Counter from './Counter'
 describe('Counter', () => {
   const mockStore = configureStore([])
   const store = mockStore({
-    count: {
+    [actionTypes.COUNTER_DUCK]: {
       value: 42,
     },
   })
