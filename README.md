@@ -46,10 +46,14 @@
 По умолчанию она используется библиотекой Husky перед каждым коммитом, не давая вам закоммитить код с предупреждениями или ошибками.
 
 `yarn run lint` - проверка eslint и stylelint
+
 `yarn run lint-fix` - проверка и исправление eslint и stylelint 
-`yarn run lint-staged": "lint-staged",
-`yarn run stylelint": "stylelint **/*.scss **/*.module.scss",
-`yarn run stylelint-fix": "stylelint **/*.scss **/*.module.scss --fix",
+
+`yarn run lint-staged` - проверка и исправление eslint и stylelint индексированных файлов
+
+`yarn run stylelint` - проверка stylelint
+
+`yarn run stylelint-fix` - проверка и исправление stylelint
  
 
 ## 2. Ветки и виды шаблонов
@@ -64,17 +68,10 @@
 ### 2.2.1 `master/develop`
 
 1. enzyme - библиотека для написания тестов
-2. http-proxy-middleware - настройка проксирования запросов (файл `src/setupProxy`)
-3. node-sass - для работы css-modules
-4. normalize.css - сохраняет значения стилей по умолчанию и приводит их к единому виду для различных браузеров
-5. react, react-dom, react-router-dom, react-scripts - основные библиотеки для работы React и роутинга
-6. react-app-rewired - позволяет расширить конфиг Webpack без eject. Доработанный конфиг содержится в файле `config-overrides.js`
-
-#### Eslint
-Используется `eslint`. Для проверки проекта на ошибки и предупреждения используется библиотека `lint-staged`.
-Команда `yarn lint` запускает проверку.
-Команда `yarn fix` запускает исправление ошибок для `js` и `jsx` файлов в директории `src`
-Также в проект добавлен `husky pre-commit`, который запрещает коммиты файлов, в которых есть eslint-ошибки
+2. node-sass - для работы css-modules
+3. react, react-dom, react-router-dom, react-scripts - основные библиотеки для работы React и роутинга
+4. react-app-rewired - позволяет расширить конфиг Webpack без eject. Доработанный конфиг содержится в файле `config-overrides.js`
+5. cypress - Библиотека для написание e2e тестов
 
 #### Стили
 Стили реализованы через `scss` + `css-modules`. Файл именуется следующим образом: `PageName.module.scss`
@@ -101,6 +98,7 @@
 В ветке `feature/redux` здесь также должна лежать папка `effects`, которая содержит все, что касается хранилища и сайд-эффектов для этой страницы. 
 6. `styles` - базовые стили в `index.scss` и файл с темой `theme.scss`, который содержит основные цвета из дизайна. Этот файл должен быть импортирован в любом scss-файле страницы, чтобы использовать оттуда все цвета и любые другие переменные.
 7. `utils` - любые побочные функции, которые можно отнести к утилитам
+8. `redux` - папка в которой хранятся ducks. Каждый duck содержит в себе файлы одной сущности (reducer, sagas, actions, types, etc).
 
 ### 2.2.3 `feature/redux`
 
@@ -112,18 +110,9 @@
 5. redux-saga - для обработки асинхронных сайд-эффектов, например запросов на сервер
 
 #### Code Splitting
-В шаблоне реализован подход `inject-reducer` и `inject-saga`, которые позволяет реализовать code-splitting в хранилище.
-Таким образом, редюсеры и саги, относящиеся к определенной странице, загружаются только, когда загружена эта страница.
-
-Вся соответствующая настройка конфигурации стора находится в файле `src/store/store.js`.
-
-Редюсеры и саги, которые не привязаны к конкретной странице, лежат здесь же в папке `src/store`. Все остальное, что относится к конкретной странице лежит в папке этой страницы в директории `effects`.
-
-С целью реализовать code-splitting при загрузке страниц в проекте используется `React.lazy()`.
+С целью реализовать code-splitting при загрузке страниц в проекте может использоваться `React.lazy()`.
 В `src/pages/routes` для его реализации используется функция `LoadPage`, которая принимает в себя название страницы, обращается в папку с соответствующим названием и достает оттуда файл нужной страницы,
 одновременно загружая редюсер и сагу (если используется шаблон feature/redux).
-
-Пример можно посмотреть в папке страницы `Home`: `src/pages/Home`.
 
 ## 3. Список технологий
 ### 1) React (v 16.8.6)
@@ -160,29 +149,37 @@ Redux делает поток данных более понятным.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Example of authorization
+Пример простейшей авторизации сделан на основе сохранения токена в cookie, пример можно посмотреть в duck'e `auth` и в компонентах `App` и `Login`
+
 ## Available Scripts
 
 In the project directory, you can run:
 
 ### `yarn start`
 
-Runs the app in the development mode.<br />
+Runs the app in the development mode.
+
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br />
+The page will reload if you make edits.
+
 You will also see any lint errors in the console.
 
 ### `yarn test`
 
-Launches the test runner in the interactive watch mode.<br />
+Launches the test runner in the interactive watch mode.
+
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `yarn build`
 
-Builds the app for production to the `build` folder.<br />
+Builds the app for production to the `build` folder.
+
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.<br />
+The build is minified and the filenames include the hashes.
+
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
