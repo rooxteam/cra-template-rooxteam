@@ -1,0 +1,8 @@
+{
+  "*.{js,jsx,ts,tsx}": [
+    "prettier --write",
+    "yarn lint"
+  ],
+  "*.{js,jsx}": "eslint",
+  "*.{module.scss,css}": "stylelint"
+}
