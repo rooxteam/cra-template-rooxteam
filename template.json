@@ -1,7 +1,6 @@
 {
   "name": "my-app",
   "version": "0.1.0",
-  "private": true,
   "dependencies": {
     "@gfx/zopfli": "^1.0.14",
     "@neuralegion/cypress-har-generator": "^4.0.0",

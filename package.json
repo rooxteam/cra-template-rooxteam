@@ -1,9 +1,9 @@
 {
   "name": "cra-template-rooxteam-ts",
+  "license": "MIT",
   "version": "0.1.0",
   "private": true,
-  "author": "roox",
-  "license": "ISC",
+  "author": "RooX Solutions",
   "engines": {
     "node": ">=10.14.0"
   },
