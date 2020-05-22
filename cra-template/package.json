@@ -1,13 +1,13 @@
 {
-  "name": "cra-template-rooxteam-ts",
+  "name": "@rooxteam/cra-template",
   "license": "MIT",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "author": "RooX Solutions",
   "engines": {
     "node": ">=10.14.0"
   },
-  "description": "Template for SPA",
+  "description": "Opinionated Rooxteam Template for SPA",
   "main": "template.json",
   "files": [
     "template",
