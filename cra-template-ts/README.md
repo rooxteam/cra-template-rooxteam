@@ -1,6 +1,4 @@
 ## 1. Git
-![Git](https://png.icons8.com/color/96/000000/git.png)
-
 ### 1.1 Репозиторий
 Клонировать через HTTPS:
 
