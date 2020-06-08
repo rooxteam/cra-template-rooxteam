@@ -1,10 +1,14 @@
 {
   "name": "@rooxteam/cra-template",
   "license": "MIT",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": false,
   "repository": "https://github.com/rooxteam/cra-template-rooxteam.git",
   "author": "RooX Solutions",
+  "contributors": [
+    "Ivan Abdulov <iabdulov@roox.ru>",
+    "Maksim Nagaev <mnagaev@roox.ru>"
+  ],
   "engines": {
     "node": ">=10.14.0"
   },
