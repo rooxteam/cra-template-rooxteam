@@ -1,8 +1,9 @@
 {
   "name": "@rooxteam/cra-template",
   "license": "MIT",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": false,
+  "repository": "https://github.com/rooxteam/cra-template-rooxteam.git",
   "author": "RooX Solutions",
   "engines": {
     "node": ">=10.14.0"
