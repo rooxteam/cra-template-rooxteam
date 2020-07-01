@@ -1,0 +1,21 @@
+# first stage for build
+FROM node:current-alpine AS builder
+WORKDIR /app
+# try to cache dependency layer
+COPY package.json package-lock.jso[n] yarn.loc[k] .npmr[c] .yarnr[c] ./
+ENV PUBLIC_URL=/
+RUN yarn install --silent
+COPY . .
+RUN yarn build
+
+# second stage will use clean nginx image and built files from first stage
+FROM fholzer/nginx-brotli
+ARG BUILD_VERSION
+ENV BUILD_VERSION=$BUILD_VERSION
+COPY --from=builder /app/build /usr/share/nginx/html
+COPY ./docker/nginx.conf.tpl /etc/nginx/conf.d/default.conf.tpl
+COPY ./docker/docker-entrypoint.sh /usr/local/bin/
+RUN chmod a+x /usr/local/bin/docker-entrypoint.sh
+CMD ["/usr/local/bin/docker-entrypoint.sh"]
+EXPOSE 8080
+
