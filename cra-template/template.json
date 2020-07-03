@@ -67,7 +67,7 @@
     "cy:docker": "docker run --rm -it -v $PWD:/e2e -w /e2e cypress/included:4.5.0 run",
     "allure:report": "npx allure generate allure-results --clean -o allure-report",
     "allure:clean": "rm -r allure-results/ allure-report/",
-    "dev-docker": "docker run --rm -p 3000:3000 -v $(pwd):/app -it $(docker build -f docker/Dockerfile.dev -q .)",
+    "dev-docker": "docker run --rm -p 3000:3000 -v $(pwd):/app -v /app/node_modules -it $(docker build -f docker/Dockerfile.dev -q .)",
     "prod-docker": "docker run --env REACT_APP_CONFIG1=111 --env REACT_APP_CONFIG2=222 --env REACT_APP_USER_INFO_URL='http://httpbin.org/json' --rm -p 8080:8080 -it $(docker build -f docker/Dockerfile.prod -q .)"
   },
   "eslintConfig": {
