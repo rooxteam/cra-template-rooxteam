@@ -1,6 +1,9 @@
 {
   "root": true,
   "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
   "plugins": [
     "@typescript-eslint",
     "cypress",
@@ -17,6 +20,7 @@
     "cypress/globals": true
   },
   "rules": {
+    "@typescript-eslint/no-unnecessary-type-assertion": 2,
     "react/prop-types": 0,
     // Make prettier code formatting suggestions more verbose.
     "prettier/prettier": [

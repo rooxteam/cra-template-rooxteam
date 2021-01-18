@@ -9,14 +9,15 @@ const getInitialState = (): ICounterState => ({
 })
 
 const mutations: ICounterMutations = {
-  [INCREMENT_COUNTER]: (state: ICounterState) => {
-    return { ...state, value: state.value + 1 }
-  },
-  [DECREMENT_COUNTER]: (state: ICounterState) => {
-    return { ...state, value: state.value - 1 }
-  },
+  [INCREMENT_COUNTER]: (state: ICounterState) => ({
+    ...state,
+    value: state.value + 1,
+  }),
+  [DECREMENT_COUNTER]: (state: ICounterState) => ({
+    ...state,
+    value: state.value - 1,
+  }),
 }
 
-export default (state = getInitialState(), action: TCounterActionTypes) => {
-  return mutations[action.type] ? mutations[action.type](state, action) : state
-}
+export default (state = getInitialState(), action: TCounterActionTypes) =>
+  mutations[action.type] ? mutations[action.type](state, action) : state

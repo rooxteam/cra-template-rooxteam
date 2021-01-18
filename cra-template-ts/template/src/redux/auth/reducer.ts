@@ -13,20 +13,15 @@ const getInitialState = (): IAuthState => ({
 })
 
 const mutations: IAuthMutations = {
-  [AUTH_LOADING_STATE]: (state: IAuthState, action: ILoadingStateAction) => {
-    return {
-      ...state,
-      loadingState: action.loadingState,
-    }
-  },
-  [AUTH_AUTHENTICATED]: (state: IAuthState, action: IAuthenticated) => {
-    return {
-      ...state,
-      isAuthenticated: action.isAuthenticated,
-    }
-  },
+  [AUTH_LOADING_STATE]: (state: IAuthState, action: ILoadingStateAction) => ({
+    ...state,
+    loadingState: action.loadingState,
+  }),
+  [AUTH_AUTHENTICATED]: (state: IAuthState, action: IAuthenticated) => ({
+    ...state,
+    isAuthenticated: action.isAuthenticated,
+  }),
 }
 
-export default (state = getInitialState(), action: TAnyAuthAction) => {
-  return mutations[action.type] ? mutations[action.type](state, action) : state
-}
+export default (state = getInitialState(), action: TAnyAuthAction) =>
+  mutations[action.type] ? mutations[action.type](state, action) : state
