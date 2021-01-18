@@ -4,7 +4,7 @@ import * as actions from './actions'
 import { IHandlers } from './types'
 
 const delay = (ms: number): Promise<number> =>
-  new Promise(res => setTimeout(res, ms))
+  new Promise((res) => setTimeout(res, ms))
 
 export const HANDLERS: IHandlers = {
   *[actionsTypes.INCREMENT_COUNTER_ASYNC](action) {

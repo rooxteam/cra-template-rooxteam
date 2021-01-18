@@ -17,7 +17,9 @@ export default function trackPageViewHOC(WrappedComponent: React.FC) {
   return (props: any) => {
     useEffect(() => {
       // eslint-disable-next-line
-      const { location: { pathname, search } } = props
+      const {
+        location: { pathname, search },
+      } = props
       const params = {
         pathname,
         query: search,
