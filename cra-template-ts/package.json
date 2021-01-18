@@ -1,13 +1,18 @@
 {
-  "name": "cra-template-rooxteam-ts",
+  "name": "@rooxteam/cra-template-ts",
   "license": "MIT",
-  "version": "0.1.0",
-  "private": true,
+  "version": "0.1.4",
+  "private": false,
+  "repository": "https://github.com/rooxteam/cra-template-rooxteam.git",
   "author": "RooX Solutions",
+  "contributors": [
+    "Ivan Abdulov <iabdulov@roox.ru>",
+    "Maksim Nagaev <mnagaev@roox.ru>"
+  ],
   "engines": {
     "node": ">=10.14.0"
   },
-  "description": "Template for SPA",
+  "description": "Opinionated Rooxteam Template for SPA, typescript",
   "main": "template.json",
   "files": [
     "template",
