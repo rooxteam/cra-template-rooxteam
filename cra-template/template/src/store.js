@@ -10,7 +10,7 @@ const middlewares = [sagaMiddleware]
 const rootReducer = combineReducers(reducers)
 
 function* staticSagas() {
-  yield all([...sagas.map(saga => saga())])
+  yield all([...sagas.map((saga) => saga())])
 }
 
 const composeEnhancers = composeWithDevTools({

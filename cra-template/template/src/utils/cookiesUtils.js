@@ -1,4 +1,4 @@
-const decode = value => {
+const decode = (value) => {
   try {
     return decodeURIComponent(value)
   } catch (e) {
@@ -6,7 +6,7 @@ const decode = value => {
   }
 }
 
-export const getCookie = name => {
+export const getCookie = (name) => {
   const arr = document.cookie.split('; ')
   for (let i = 0, l = arr.length; i < l; i += 1) {
     const item = arr[i].split('=')

@@ -11,7 +11,7 @@ const ProtectedRoute = ({ component: Component, ...props }) => {
   return (
     <Route
       {...props}
-      render={renderProps => {
+      render={(renderProps) => {
         return Component && (token || path === '/login') ? (
           <Component {...renderProps} />
         ) : (

@@ -8,14 +8,9 @@ const getInitialState = () => ({
 })
 
 const mutations = {
-  [INCREMENT_COUNTER]: state => {
-    return { ...state, value: state.value + 1 }
-  },
-  [DECREMENT_COUNTER]: state => {
-    return { ...state, value: state.value - 1 }
-  },
+  [INCREMENT_COUNTER]: (state) => ({ ...state, value: state.value + 1 }),
+  [DECREMENT_COUNTER]: (state) => ({ ...state, value: state.value - 1 }),
 }
 
-export default (state = getInitialState(), action) => {
-  return mutations[action.type] ? mutations[action.type](state, action) : state
-}
+export default (state = getInitialState(), action) =>
+  mutations[action.type] ? mutations[action.type](state, action) : state

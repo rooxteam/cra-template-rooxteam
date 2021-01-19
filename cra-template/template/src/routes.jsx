@@ -33,27 +33,23 @@ routes = routes.map(route => {
 
  */
 
-const RouteMap = () => {
-  return (
-    <React.Fragment>
-      {/* <YMInitializer accounts={[ymOptions.counterId]} /> */}
-      <div className="container">
-        <Switch>
-          {routes.map(item => {
-            return (
-              <ProtectedRoute
-                path={item.path}
-                component={item.component}
-                exact={item.exact}
-                key={item.path}
-              />
-            )
-          })}
-          <Redirect exact from="*" to="/" />
-        </Switch>
-      </div>
-    </React.Fragment>
-  )
-}
+const RouteMap = () => (
+  <React.Fragment>
+    {/* <YMInitializer accounts={[ymOptions.counterId]} /> */}
+    <div className="container">
+      <Switch>
+        {routes.map((item) => (
+          <ProtectedRoute
+            path={item.path}
+            component={item.component}
+            exact={item.exact}
+            key={item.path}
+          />
+        ))}
+        <Redirect exact from="*" to="/" />
+      </Switch>
+    </div>
+  </React.Fragment>
+)
 
 export default RouteMap

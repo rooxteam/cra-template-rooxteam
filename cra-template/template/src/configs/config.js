@@ -6,7 +6,7 @@
 
 let config
 
-const configAdapter = key => config[key]
+const configAdapter = (key) => config[key]
 
 const isDev =
   process.env.NODE_ENV === 'development' ||

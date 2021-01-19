@@ -2,7 +2,7 @@ import { put, takeEvery } from 'redux-saga/effects'
 import * as actionsTypes from './constants'
 import * as actions from './actions'
 
-const delay = ms => new Promise(res => setTimeout(res, ms))
+const delay = (ms) => new Promise((res) => setTimeout(res, ms))
 
 export const HANDLERS = {
   *[actionsTypes.INCREMENT_COUNTER_ASYNC](action) {

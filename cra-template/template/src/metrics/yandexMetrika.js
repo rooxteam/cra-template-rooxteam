@@ -22,7 +22,7 @@ class YandexMetrika {
   }
 
   user(userId) {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       this.userId = userId
       resolve({
         userId,
@@ -40,7 +40,7 @@ class YandexMetrika {
             params,
           })
         })
-        .catch(error => {
+        .catch((error) => {
           // eslint-disable-next-line no-console
           console.error('YM: Failed to initialize', error)
           reject(error)
@@ -60,7 +60,7 @@ class YandexMetrika {
 
   load() {
     if (!this.promise) {
-      this.promise = new Promise(resolve => {
+      this.promise = new Promise((resolve) => {
         if (this.loaded) {
           resolve()
         } else {
