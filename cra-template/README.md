@@ -2,11 +2,11 @@
 ### 1.1 Репозиторий
 Клонировать через HTTPS:
 
-`git clone https://bitbucket.org/rooxteam/cra-template-rooxteam.git`
+`git clone https://github.com/rooxteam/cra-template-rooxteam`
 
-Или клонировать через SSH:
+Или клонировать через GitHub CLI:
 
-`git clone git@bitbucket.org:rooxteam/cra-template-rooxteam.git`
+`gh repo clone rooxteam/cra-template-rooxteam`
 
 ### 1.2 Рабочий процесс
 * Имя ветки для production релизов: origin/master 

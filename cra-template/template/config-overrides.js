@@ -17,11 +17,15 @@ const pluginsOptions = {
     fileName: 'preload.conf',
     generate: (seed, files) =>
       files
-        .filter(file => (file.isInitial || file.name.endsWith('.woff2')) && !file.name.endsWith('.map'))
-        .map(file => file.path),
-    serialize: manifest =>
+        .filter(
+          (file) =>
+            (file.isInitial || file.name.endsWith('.woff2')) &&
+            !file.name.endsWith('.map'),
+        )
+        .map((file) => file.path),
+    serialize: (manifest) =>
       `http2_push_preload on;\n${manifest
-        .map(p => {
+        .map((p) => {
           if (p.endsWith('.js')) {
             return `add_header Link "<${p}>; as=script; rel=preload";`
           }
@@ -82,16 +86,24 @@ const loaders = {
   },
 }
 
-const addPlugins = config => {
+const addPlugins = (config) => {
   const isProduction = config.mode === 'production'
   const { manifest, brotli, compression, generateJson } = pluginsOptions
+  delete compression.cache
 
   const plugins = [
     { plugin: LodashModuleReplacementPlugin },
-    { plugin: TerserPlugin, options: { chunkFilter: () => false }, condition: isProduction },
+    {
+      plugin: TerserPlugin,
+      condition: isProduction,
+    },
     { plugin: ManifestPlugin, options: manifest, condition: isProduction },
     { plugin: BrotliPlugin, options: brotli, condition: isProduction },
-    { plugin: CompressionPlugin, options: compression, condition: isProduction },
+    {
+      plugin: CompressionPlugin,
+      options: compression,
+      condition: isProduction,
+    },
     {
       plugin: GenerateJsonPlugin,
       additionalFirstOption: 'widget-ver.json',
@@ -99,21 +111,33 @@ const addPlugins = config => {
       condition: isProduction,
     },
   ]
-  plugins.forEach(({ plugin: Plugin, options = null, condition = true, additionalFirstOption = null }) => {
-    const isHaveAdditionalFirstOption = Boolean(additionalFirstOption)
-    let addedPlugin = new Plugin()
-    if (options) {
-      addedPlugin = !isHaveAdditionalFirstOption ? new Plugin(options) : new Plugin(additionalFirstOption, options)
-    }
-    if (condition) config.plugins.push(addedPlugin)
-  })
+  plugins.forEach(
+    ({
+      plugin: Plugin,
+      options = null,
+      condition = true,
+      additionalFirstOption = null,
+    }) => {
+      const isHaveAdditionalFirstOption = Boolean(additionalFirstOption)
+      let addedPlugin = new Plugin()
+      if (options) {
+        addedPlugin = !isHaveAdditionalFirstOption
+          ? new Plugin(options)
+          : new Plugin(additionalFirstOption, options)
+      }
+      if (condition) config.plugins.push(addedPlugin)
+    },
+  )
   return config
 }
 
-const addWebpackPlugins = config => {
+const addWebpackPlugins = (config) => {
   const isProduction = config.mode === 'production'
   const plugins = [
-    { plugin: new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /ru/), condition: isProduction },
+    {
+      plugin: new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /ru/),
+      condition: isProduction,
+    },
   ]
   plugins.forEach(({ plugin, condition = false }) => {
     if (condition) config.plugins.push(plugin)
@@ -121,9 +145,9 @@ const addWebpackPlugins = config => {
   return config
 }
 
-const addLoaders = config => {
-  const rules = Object.keys(loaders).map(loader => loaders[loader])
-  rules.forEach(rule => config.module.rules.push(rule))
+const addLoaders = (config) => {
+  const rules = Object.keys(loaders).map((loader) => loaders[loader])
+  rules.forEach((rule) => config.module.rules.push(rule))
   return config
 }
 
@@ -133,8 +157,12 @@ const addLoaders = config => {
 // };
 
 const replacePluginOption = (plugins, nameMatcher, newOptions) => {
-  const pluginIndex = plugins.findIndex(plugin => {
-    return plugin.constructor && plugin.constructor.name && nameMatcher(plugin.constructor.name)
+  const pluginIndex = plugins.findIndex((plugin) => {
+    return (
+      plugin.constructor &&
+      plugin.constructor.name &&
+      nameMatcher(plugin.constructor.name)
+    )
   })
 
   if (pluginIndex === -1) {
@@ -144,25 +172,29 @@ const replacePluginOption = (plugins, nameMatcher, newOptions) => {
   return null
 }
 
-const disableSSICommentsRemoving = config => {
-  replacePluginOption(config.plugins, name => /HtmlWebpackPlugin/i.test(name), {
-    minify: {
-      removeComments: false,
-      collapseWhitespace: true,
-      removeRedundantAttributes: true,
-      useShortDoctype: true,
-      removeEmptyAttributes: true,
-      removeStyleLinkTypeAttributes: true,
-      keepClosingSlash: true,
-      minifyJS: true,
-      minifyCSS: true,
-      minifyURLs: true,
+const disableSSICommentsRemoving = (config) => {
+  replacePluginOption(
+    config.plugins,
+    (name) => /HtmlWebpackPlugin/i.test(name),
+    {
+      minify: {
+        removeComments: false,
+        collapseWhitespace: true,
+        removeRedundantAttributes: true,
+        useShortDoctype: true,
+        removeEmptyAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        keepClosingSlash: true,
+        minifyJS: true,
+        minifyCSS: true,
+        minifyURLs: true,
+      },
     },
-  })
+  )
   return config
 }
 
-const resolveReact = baseConfig => {
+const resolveReact = (baseConfig) => {
   const config = { ...baseConfig }
   config.resolve.alias.react = path.resolve('./node_modules/react')
   return config

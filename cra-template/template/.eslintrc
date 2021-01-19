@@ -15,6 +15,9 @@
     "jest": true
   },
   "rules": {
+    "jsx-a11y/anchor-has-content": [ 2, {
+      "components": [ "Anchor" ]
+    }],
     // Make prettier code formatting suggestions more verbose.
     "prettier/prettier": [
       "warn"

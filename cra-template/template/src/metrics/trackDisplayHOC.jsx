@@ -6,7 +6,7 @@ import MetricsConfig from './metrics.config'
 const metrics = createMetrics(MetricsConfig)
 
 export default function trackPageViewHOC(WrappedComponent) {
-  return props => {
+  return (props) => {
     useEffect(() => {
       const {
         // eslint-disable-next-line
